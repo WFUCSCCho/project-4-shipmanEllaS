@@ -38,7 +38,16 @@ public class SeparateChainingHashTable<AnyType> {
      * @param x the item to insert.
      */
     public void insert(AnyType x) {
-        // FINISH ME
+        //FINISH ME
+        int key = hash(x.toString(), theLists.length);      //may need to be length-1, check
+        if (key >= theLists.length) {        //if key greater than table size, rehash to next prime
+            rehash();
+            //System.out.println("rehash");
+            insert(x);
+        } else {                            //else, go ahead and add to head of list :)
+            theLists[key].add(x); //IS ADD THE CORRECT KEYWORD?
+            //System.out.println("insert " + x);
+        }
     }
 
     /**
@@ -48,6 +57,14 @@ public class SeparateChainingHashTable<AnyType> {
      */
     public void remove(AnyType x) {
         // FINISH ME
+        if (!contains(x)) {         //if not in the table, can't remove !
+            //System.out.println("invalid remove " + x);
+            return;
+        } else {
+            int key = hash(x.toString(), theLists.length);      //may need to be length-1, check
+            theLists[key].remove(x);                            //IS REMOVE THE CORRECT KEYWORD?
+            //System.out.println("remove " + x);
+        }
     }
 
     /**
@@ -58,6 +75,14 @@ public class SeparateChainingHashTable<AnyType> {
      */
     public boolean contains(AnyType x) {
         // FINISH ME
+        int key = hash(x.toString(), theLists.length);      //may need to be length-1, check
+        if (key >= theLists.length) {        //if key greater than table size, false
+            return false;
+        } else if (theLists[key].contains(x)) {        //found in list, true
+            return true;
+        } else {                                        //otherwise, false
+            return false;
+        }
     }
 
     /**
@@ -65,6 +90,9 @@ public class SeparateChainingHashTable<AnyType> {
      */
     public void makeEmpty() {
         // FINISH ME
+        for (int i = 0; i < theLists.length; i++) {
+            theLists[i].clear();                        //is this. what he means? lol
+        }
     }
 
     /**
@@ -89,6 +117,18 @@ public class SeparateChainingHashTable<AnyType> {
 
     private void rehash() {
         // FINISH ME
+        //Create new table
+        List<AnyType>[] theNewLists = new LinkedList[nextPrime(theLists.length)];
+        //Copy over lists from original table
+        for (int i = 0; i < theLists.length; i++) {
+            theNewLists[i] = theLists[i];
+        }
+        //Add new lists to table
+        for (int i = theLists.length; i < theNewLists.length; i++) {
+            theNewLists[i] = new LinkedList<>();
+        }
+        //Assign new list as current hash table
+        theLists = theNewLists;
     }
 
     private int myhash(AnyType x) {

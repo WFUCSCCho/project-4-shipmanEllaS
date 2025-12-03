@@ -1,3 +1,10 @@
+/**********************************************************************************************
+ * @file : SeparateChainingHashTable.java
+ * @description : Separate chaining hash table class for generic type AnyType.
+ * @author : Ella Shipman
+ * @date : December 3, 2025
+ *********************************************************************************************/
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -38,7 +45,6 @@ public class SeparateChainingHashTable<AnyType> {
      * @param x the item to insert.
      */
     public void insert(AnyType x) {
-        //FINISH ME
         int key = hash(x.toString(), theLists.length);      //may need to be length-1, check
         if (key >= theLists.length) {        //if key greater than table size, rehash to next prime
             rehash();
@@ -56,7 +62,6 @@ public class SeparateChainingHashTable<AnyType> {
      * @param x the item to remove.
      */
     public void remove(AnyType x) {
-        // FINISH ME
         if (!contains(x)) {         //if not in the table, can't remove !
             //System.out.println("invalid remove " + x);
             return;
@@ -74,7 +79,6 @@ public class SeparateChainingHashTable<AnyType> {
      * @return true if x is not found.
      */
     public boolean contains(AnyType x) {
-        // FINISH ME
         int key = hash(x.toString(), theLists.length);      //may need to be length-1, check
         if (key >= theLists.length) {        //if key greater than table size, false
             return false;
@@ -89,7 +93,6 @@ public class SeparateChainingHashTable<AnyType> {
      * Make the hash table logically empty.
      */
     public void makeEmpty() {
-        // FINISH ME
         for (int i = 0; i < theLists.length; i++) {
             theLists[i].clear();                        //is this. what he means? lol
         }
@@ -116,7 +119,6 @@ public class SeparateChainingHashTable<AnyType> {
     }
 
     private void rehash() {
-        // FINISH ME
         //Create new table
         List<AnyType>[] theNewLists = new LinkedList[nextPrime(theLists.length)];
         //Copy over lists from original table

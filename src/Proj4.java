@@ -1,7 +1,20 @@
+/**********************************************************************************************
+ * @file : Proj4.java
+ * @description : Animal Crossing: New Horizons villagers, sourced from "villagers.csv",
+ *                processed into sorted, shuffled, and reversed arrayLists and inserted into
+ *                separate chaining hash tables.
+ * @author : Ella Shipman
+ * @date : December 3, 2025
+ * @acknowledgement : Jessica Li's "Animal Crossing New Horizons Catalog", "villagers.csv" file.
+ * https://www.kaggle.com/datasets/jessicali9530/animal-crossing-new-horizons-nookplaza-dataset.
+ *********************************************************************************************/
+
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Collections;
@@ -27,8 +40,6 @@ public class Proj4 {
 
         // ignore first line
         inputFileNameScanner.nextLine();
-
-        // FINISH ME
 
         //PROCESS FILE----------------------------------------------------
         //Read file and fill out hashtable of datatype Villager
@@ -73,8 +84,12 @@ public class Proj4 {
 
         //Creating and timing insertion, deletion, and search for hash table
         SeparateChainingHashTable<Villager> villagersHT = new SeparateChainingHashTable<>();
-        //sorted
+        //as discussed with TA on 12/2/25, it seems the hash table has a cache that causes the first insertion of an
+        //arraylist to cost more time than following insertions. so, we clear the cache first:
         Collections.sort(villagers);
+        addToHash(villagersHT, villagers);
+        villagersHT.makeEmpty();
+        //sorted
         sortedData += addToHash(villagersHT, villagers) + ";";           //Insert
         sortedData += searchInHash(villagersHT, villagers) + ";";        //Search
         sortedData += removeFromHash(villagersHT, villagers);            //Remove
@@ -127,6 +142,7 @@ public class Proj4 {
         for (int i = 0; i < arr.size(); i++) {
             ht.insert(arr.get(i));
         }
+        Instant end = Instant.now();
         return (System.nanoTime()-timeTaken);
     }
 
@@ -143,6 +159,7 @@ public class Proj4 {
                 System.out.println("ERROR: VILLAGER NOT FOUND");
             }
         }
+
         return (System.nanoTime()-timeTaken);
     }
 

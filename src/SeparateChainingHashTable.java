@@ -1,3 +1,10 @@
+/**********************************************************************************************
+ * @file : SeparateChainingHashTable.java
+ * @description : Separate chaining hash table class for generic type AnyType.
+ * @author : Ella Shipman
+ * @date : December 3, 2025
+ *********************************************************************************************/
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -38,7 +45,17 @@ public class SeparateChainingHashTable<AnyType> {
      * @param x the item to insert.
      */
     public void insert(AnyType x) {
-        // FINISH ME
+        int key = hash(x.toString(), theLists.length);
+        if (key >= theLists.length) {        //if key greater than table size, rehash to next prime
+            rehash();
+            //System.out.println("rehash");
+            insert(x);
+        } else {                            //else, go ahead and add to head of list :)
+            if (!theLists[key].contains(x)) {
+                theLists[key].add(x);
+                //System.out.println("insert " + x);
+            }
+        }
     }
 
     /**
@@ -47,7 +64,14 @@ public class SeparateChainingHashTable<AnyType> {
      * @param x the item to remove.
      */
     public void remove(AnyType x) {
-        // FINISH ME
+        if (!contains(x)) {       
+            //System.out.println("invalid remove " + x);
+            return;
+        } else {
+            int key = hash(x.toString(), theLists.length);  
+            theLists[key].remove(x);                          
+            //System.out.println("remove " + x);
+        }
     }
 
     /**
@@ -57,14 +81,23 @@ public class SeparateChainingHashTable<AnyType> {
      * @return true if x is not found.
      */
     public boolean contains(AnyType x) {
-        // FINISH ME
+        int key = hash(x.toString(), theLists.length); 
+        if (key >= theLists.length) {        //if key greater than table size, false
+            return false;
+        } else if (theLists[key].contains(x)) {        //found in list, true
+            return true;
+        } else {                                        //otherwise, false
+            return false;
+        }
     }
 
     /**
      * Make the hash table logically empty.
      */
     public void makeEmpty() {
-        // FINISH ME
+        for (int i = 0; i < theLists.length; i++) {
+            theLists[i].clear();
+        }
     }
 
     /**
@@ -88,7 +121,18 @@ public class SeparateChainingHashTable<AnyType> {
     }
 
     private void rehash() {
-        // FINISH ME
+        //Create new table
+        List<AnyType>[] theNewLists = new LinkedList[nextPrime(theLists.length)];
+        //Copy over lists from original table
+        for (int i = 0; i < theLists.length; i++) {
+            theNewLists[i] = theLists[i];
+        }
+        //Add new lists to table
+        for (int i = theLists.length; i < theNewLists.length; i++) {
+            theNewLists[i] = new LinkedList<>();
+        }
+        //Assign new list as current hash table
+        theLists = theNewLists;
     }
 
     private int myhash(AnyType x) {

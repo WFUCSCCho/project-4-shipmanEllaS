@@ -64,12 +64,12 @@ public class SeparateChainingHashTable<AnyType> {
      * @param x the item to remove.
      */
     public void remove(AnyType x) {
-        if (!contains(x)) {         //if not in the table, can't remove !
+        if (!contains(x)) {       
             //System.out.println("invalid remove " + x);
             return;
         } else {
-            int key = hash(x.toString(), theLists.length);      //may need to be length-1, check
-            theLists[key].remove(x);                            //IS REMOVE THE CORRECT KEYWORD?
+            int key = hash(x.toString(), theLists.length);  
+            theLists[key].remove(x);                          
             //System.out.println("remove " + x);
         }
     }
@@ -81,7 +81,7 @@ public class SeparateChainingHashTable<AnyType> {
      * @return true if x is not found.
      */
     public boolean contains(AnyType x) {
-        int key = hash(x.toString(), theLists.length);      //may need to be length-1, check
+        int key = hash(x.toString(), theLists.length); 
         if (key >= theLists.length) {        //if key greater than table size, false
             return false;
         } else if (theLists[key].contains(x)) {        //found in list, true
@@ -96,7 +96,7 @@ public class SeparateChainingHashTable<AnyType> {
      */
     public void makeEmpty() {
         for (int i = 0; i < theLists.length; i++) {
-            theLists[i].clear();                        //is this. what he means? lol
+            theLists[i].clear();
         }
     }
 

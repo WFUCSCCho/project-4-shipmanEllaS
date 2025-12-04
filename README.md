@@ -96,8 +96,8 @@ Insertion, search, and deletion running time (reversed):
 Document the source of your dataset and any modifications you made to it. Describe the results of your analysis and 
 how it compares to the theoretical performance of the hash table operations.
 
-Dataset Source: Jessica Li's "Animal Crossing New Horizons Catalog" at https://www.kaggle.com/datasets/jessicali9530/animal-crossing-new-horizons-nookplaza-dataset.
-Dataset Modifications ("None" if unchanged): None
+Dataset Source: Jessica Li's "Animal Crossing New Horizons Catalog" at https://www.kaggle.com/datasets/jessicali9530/animal-crossing-new-horizons-nookplaza-dataset. <br> <br>
+Dataset Modifications ("None" if unchanged): None <br> <br>
 Result Analysis: The time complexity of a typical dynamic hash table should be O(1) for insertion, search, and deletion average cases. In the worst case, each is O(N) time complexity (because all elements in table are dumped in one bucket, effectively creating a standard linked list). My results seem to be skewed by a cache created by using linked lists for all buckets in the hash table, but they would be better analyzed if the dataset had more than 392 items. It's quite a small dataset, so analyzing a larger one may prove helpful in determining how exactly my hash table is behaving in regards to time complexity. From the graphs alone, O(N) could be the conclusion for insertion, search, and deletion of each dataset, as all graphs are gradually increasing instead of staying constant. It is notable that the sorted dataset tends to have a higher insertion time complexity, likely due to the aforementioned cache created by the table.
 
 ## Submission:

@@ -45,14 +45,16 @@ public class SeparateChainingHashTable<AnyType> {
      * @param x the item to insert.
      */
     public void insert(AnyType x) {
-        int key = hash(x.toString(), theLists.length);      //may need to be length-1, check
+        int key = hash(x.toString(), theLists.length);
         if (key >= theLists.length) {        //if key greater than table size, rehash to next prime
             rehash();
             //System.out.println("rehash");
             insert(x);
         } else {                            //else, go ahead and add to head of list :)
-            theLists[key].add(x); //IS ADD THE CORRECT KEYWORD?
-            //System.out.println("insert " + x);
+            if (!theLists[key].contains(x)) {
+                theLists[key].add(x);
+                //System.out.println("insert " + x);
+            }
         }
     }
 

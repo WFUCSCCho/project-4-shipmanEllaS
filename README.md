@@ -81,21 +81,24 @@ each case. Take a screenshot of your graph and put them here by modifying this f
 it to this repository.
 
 Insertion, search, and deletion running time (already sorted):
-
-![Firefly picture of a cat 86147](https://github.com/user-attachments/assets/8b2d008e-3011-4979-97b8-fa2e9886a01a)
+<img width="891" height="547" alt="image" src="https://github.com/user-attachments/assets/9294093d-970e-4577-a20a-4fd8352e660e" />
 
 
 Insertion, search, and deletion running time (shuffled):
+<img width="887" height="541" alt="image" src="https://github.com/user-attachments/assets/6cf7112d-942d-4e0b-8dff-0e78d255cabc" />
+
 
 Insertion, search, and deletion running time (reversed):
+<img width="891" height="539" alt="image" src="https://github.com/user-attachments/assets/1edad99c-e65e-4506-bf24-c47d4258a8cd" />
+
 
 ## 5. **Document your Dataset and Results**
 Document the source of your dataset and any modifications you made to it. Describe the results of your analysis and 
 how it compares to the theoretical performance of the hash table operations.
 
-Dataset Source: // FINISH ME
-Dataset Modifications ("None" if unchanged): // FINISH ME
-Result Analysis: // FINISH ME
+Dataset Source: Jessica Li's "Animal Crossing New Horizons Catalog" at https://www.kaggle.com/datasets/jessicali9530/animal-crossing-new-horizons-nookplaza-dataset.
+Dataset Modifications ("None" if unchanged): None
+Result Analysis: The time complexity of a typical dynamic hash table should be O(1) for insertion, search, and deletion average cases. In the worst case, each is O(N) time complexity (because all elements in table are dumped in one bucket, effectively creating a standard linked list). My results seem to be skewed by a cache created by using linked lists for all buckets in the hash table, but they would be better analyzed if the dataset had more than 392 items. It's quite a small dataset, so analyzing a larger one may prove helpful in determining how exactly my hash table is behaving in regards to time complexity. From the graphs alone, O(N) could be the conclusion for insertion, search, and deletion of each dataset, as all graphs are gradually increasing instead of staying constant. It is notable that the sorted dataset tends to have a higher insertion time complexity, likely due to the aforementioned cache created by the table.
 
 ## Submission:
 
